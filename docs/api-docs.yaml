@@ -1,0 +1,90 @@
+openapi: "3.1.1"
+info:
+  title: API Pengenalan Teks Aksara Jawa Nglegena
+  version: "1.0.0"
+  description: >
+    API untuk melakukan prediksi teks Aksara Jawa (Nglegena)
+    berdasarkan input gambar menggunakan model deep learning
+    hasil penelitian.
+servers:
+  - url: https://example-url.com/api
+    description: Dummy Server
+tags:
+  - name: Prediction
+    description: Endpoint untuk melakukan inferensi model
+paths:
+  /predict:
+    post:
+      tags:
+        - Prediction
+      summary: Prediksi teks Aksara Jawa dari gambar
+      description: >
+        Endpoint ini menerima file gambar berisi karakter
+        Aksara Jawa Nglegena dan mengembalikan hasil transkripsi karakter.
+      operationId: predictAksara
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - image
+              properties:
+                image:
+                  type: string
+                  format: binary
+                  description: File gambar (JPG/JPEG/PNG) yang berisi aksara Jawa
+      responses:
+        "200":
+          description: Prediksi berhasil dilakukan
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PredictionResponse"
+              examples:
+                successExample:
+                  summary: Contoh respons sukses
+                  value:
+                    status: success
+                    prediction: "ꦤꦛꦫ"
+        "400":
+          description: Permintaan tidak valid (gambar tidak dikirim atau format tidak didukung)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+              examples:
+                missingImage:
+                  value:
+                    status: error
+                    message: "Image file is required and must be in JPG/JPEG/PNG format"
+        "500":
+          description: Terjadi kesalahan pada server
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+components:
+  schemas:
+    PredictionResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: success
+        prediction:
+          type: string
+          description: Hasil transliterasi aksara Jawa ke huruf Latin
+          example: "ꦤꦛꦫ"
+
+    ErrorResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: error
+        message:
+          type: string
+          example: "Internal server error"

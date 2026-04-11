@@ -1,0 +1,7 @@
+fastapi
+python-multipart
+uvicorn[standard]
+torch
+torchvision
+pillow
+pydantic-settings
