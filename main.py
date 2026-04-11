@@ -5,6 +5,7 @@ from functools import lru_cache
 
 import torch
 from fastapi import FastAPI, File, HTTPException, UploadFile, status
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from PIL import Image
 from pydantic import BaseModel
@@ -102,6 +103,14 @@ app = FastAPI(
     title="API Pengenalan Teks Aksara Jawa Nglegena",
     version="1.0.0",
     lifespan=lifespan,
+)
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
