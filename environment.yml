@@ -6,4 +6,5 @@ dependencies:
   - python=3.10.19
   - pip
   - pip:
-      - -r requirements.txt
+      - -r ./requirements_1.txt
+      - -r ./requirements_2.txt
