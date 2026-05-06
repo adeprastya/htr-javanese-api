@@ -22,7 +22,7 @@ from src.vocabulary import BLANK_IDX, IDX2CHAR, NUM_CLASSES
 
 
 class Settings(BaseSettings):
-    model_path: str = "model/5cnn-2bilstm.pth"
+    model_path: str = "model/prod-2.pth"
     img_height: int = 48
     cnn_layers: int = 5
     rnn_layers: int = 2
