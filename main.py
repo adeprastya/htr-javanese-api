@@ -26,7 +26,7 @@ class Settings(BaseSettings):
     img_height: int = 48
     cnn_layers: int = 5
     rnn_layers: int = 2
-    max_image_bytes: int = 4 * 1024 * 1024  # 4 MB
+    max_image_bytes: int = 10 * 1024 * 1024  # 10 MB
 
     class Config:
         env_prefix = "APP_"
